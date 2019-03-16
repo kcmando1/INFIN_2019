@@ -28,6 +28,7 @@
 #include <netinet/in.h>
 #include <arpa/inet.h>
 #include <string.h>
+#include "functions.h"
 
 #define SERVER_PORT_NUM		5001
 #define SERVER_MAX_CONNECTIONS	4

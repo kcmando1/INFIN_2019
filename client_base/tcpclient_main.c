@@ -29,6 +29,7 @@
 #include <arpa/inet.h>
 #include <unistd.h>
 #include <string.h>
+#include "functions.h"
 
 
 #define REQUEST_MSG_SIZE	1024
@@ -52,7 +53,7 @@ int main(int argc, char *argv[]){
 	int			mlen;
 	int 		result;
 	char		buffer[256];
-	char		missatge[] = "#1";
+	char		missatge[] = "{X}";
 
 	/*Crear el socket*/
 	sFd=socket(AF_INET,SOCK_STREAM,0);
