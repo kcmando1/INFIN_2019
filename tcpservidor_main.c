@@ -46,6 +46,7 @@
 
 int main(int argc, char *argv[])
 {
+	//variables del socket
 	struct sockaddr_in	serverAddr;
 	struct sockaddr_in	clientAddr;
 	int			sockAddrSize;
@@ -55,6 +56,9 @@ int main(int argc, char *argv[])
 	int 		result;
 	char		buffer[256];
 	char		missatge[] = "#(2)(0,23.3)(10,23.3)";
+	//variables de funcionament
+	int ref=-2;
+	int v=1,t=2,m=3;
 
 	/*Preparar l'adreça local*/
 	sockAddrSize=sizeof(struct sockaddr_in);
@@ -83,6 +87,7 @@ int main(int argc, char *argv[])
 		/*Rebre*/
 		result = read(newFd, buffer, 256);
 		printf("Missatge rebut del client(bytes %d): %s\n",	result, buffer);
+		ref=serverStrRead (buffer, &v, &t, &m);
 
 		/*Enviar*/
 		strcpy(buffer,missatge); //Copiar missatge a buffer

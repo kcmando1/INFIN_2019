@@ -1,6 +1,7 @@
 #include <stdio.h>
 #include <stdlib.h>
 #include <string.h>
+//#include "functions.h"
 int clientStrRead(char *r, int *cr, float *n){
 	
 	int ref=-1;
@@ -97,7 +98,7 @@ int clientStrRead(char *r, int *cr, float *n){
 
 
 int serverStrRead (char *r, int *v, int *t, int *m){
-	
+	printf("/n in/n");
 	
 	int ref=-1;
 	int i=0;
