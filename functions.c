@@ -1,9 +1,10 @@
 #include <stdio.h>
 #include <stdlib.h>
 #include <string.h>
-//#include "functions.h"
+#include "functions.h"
 void prova(){
 	printf("\n in \n");
+	printf("asdf");
 
 }
 int clientStrRead(char *r, int *cr, float *n){
