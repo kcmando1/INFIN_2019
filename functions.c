@@ -2,6 +2,10 @@
 #include <stdlib.h>
 #include <string.h>
 //#include "functions.h"
+void prova(){
+	printf("\n in \n");
+
+}
 int clientStrRead(char *r, int *cr, float *n){
 	
 	int ref=-1;
