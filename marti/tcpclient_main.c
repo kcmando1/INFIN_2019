@@ -46,7 +46,7 @@
 *
 */
 int main(int argc, char *argv[]){
-	prova();
+	
 	struct sockaddr_in	serverAddr;
 	char	    serverName[] = "127.0.0.1"; //Adreça IP on est� el servidor
 	int			sockAddrSize;
