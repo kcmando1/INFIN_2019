@@ -8,7 +8,7 @@
 //void clientMenuStr(char* str)
 int main(/*char* buffer*/)
 {
-	char* buffer;
+	char buffer[7];
 	char misatge[20]="";
 	char temps[2];
 	char mostres [5];
@@ -63,7 +63,7 @@ int main(/*char* buffer*/)
 					aux2=atoi(temps);
 					if((aux2 != 0)&&(0<aux2 && aux2<10)){
 						tmp[0]='0';
-						tmp[1]=temps;
+						tmp[1]=temps[0];
 					}else{
 						//error
 						printf("error");
@@ -117,27 +117,33 @@ int main(/*char* buffer*/)
 							break;				
 						}
 				}	
-				printf("/n resultat t %s/n");	
 //------------------------------------------------------------------------				
 						system(cls);
-						printf("Introduir numero de mostres (0 a 9):\n");
+						printf("Introduir numero de mostres (1 a 9):\n");
 						scanf("%s",mostres);
-						aux2 = atoi(mostres);
-						if(0<aux2 && aux2<10){
-							tmp1=aux2;
+						aux2 =(int) mostres[0];
+						if (aux2>48 && aux2<=57){
+							tmp1=mostres[0];
+							printf("mostres=%c",tmp1);
 						}else{
 							printf("error");
 							break;
 						}
 //----------------------------------------------------------------------									
 						if(flag==0){
+							
 							buffer[0]='{';
 							buffer[1]='M';
-							strcat(buffer,sta);
-							strcat(buffer,tmp);
-							strcat(buffer,tmp1);
-							buffer[5]='}';
-							buffer[6]='\0';
+							
+						
+							buffer[2]=sta;
+							buffer[3]=tmp[0];
+							buffer[4]=tmp[1];
+							buffer[5]=tmp1;
+							buffer[6]='}';
+							buffer[7]='\0';
+							printf("\n buffer=%s",buffer);
+							
 						}		
 			break;
 //----------------------------------------------------------------------			
@@ -145,8 +151,10 @@ int main(/*char* buffer*/)
 		case 'u':
 			system(cls);
 			printf("Es vol rebre mitjana aritmètica\n");
-			
-			
+			buffer[0]='{';
+			buffer[1]='U';
+			buffer[2]='}';
+			buffer[3]='\0';
 
 			printf("Misatge=%s",buffer);
 			break;
@@ -155,6 +163,10 @@ int main(/*char* buffer*/)
 		case'x':
 			system(cls);
 			printf("Es vol rebre el valor màxim\n");
+			buffer[0]='{';
+			buffer[1]='X';
+			buffer[2]='}';
+			buffer[3]='\0';
 			
 					
 			printf("Misatge=%s",buffer);
@@ -164,8 +176,12 @@ int main(/*char* buffer*/)
 		case 'y':
 			system(cls);
 			printf("Es vol rebre el valor minim\n");
+			buffer[0]='{';
+			buffer[1]='Y';
+			buffer[2]='}';
+			buffer[3]='\0';
 			
-			buffer=			
+					
 			printf("Misatge=%s",buffer);
 			break;	
 //----------------------------------------------------------------------					
@@ -173,6 +189,10 @@ int main(/*char* buffer*/)
 		case 'r':
 			system(cls);
 			printf("Es vol rebre el valor maxim i minim\n");
+			buffer[0]='{';
+			buffer[1]='R';
+			buffer[2]='}';
+			buffer[3]='\0';
 			
 						
 			printf("Misatge=%s",buffer);
@@ -182,6 +202,10 @@ int main(/*char* buffer*/)
 		case 'b':
 			system(cls);
 			printf("Es vol rebre el valor de mostres guardades\n");
+			buffer[0]='{';
+			buffer[1]='B';
+			buffer[2]='}';
+			buffer[3]='\0';
 			
 					
 			printf("Misatge=%s",buffer);
