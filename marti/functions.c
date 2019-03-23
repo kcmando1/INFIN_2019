@@ -356,15 +356,14 @@ int clientStrRead(char *r, int *cr, float *n){
 
 
 int serverStrRead (char *r, int *v, int *t, int *m){
-	printf("/n in/n");
 	
-	int ref=-1;
+	int ref=-2;
 	int i=0;
 	int flag=0;
 	char aux;
 	
 	if (r[i]!="{"){
-		flag=1;
+		ref=-1;
 	}else{
 		i++;//p1	
 		aux=r[i];

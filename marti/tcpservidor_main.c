@@ -88,6 +88,10 @@ int main(int argc, char *argv[])
 		result = read(newFd, buffer, 256);
 		printf("Missatge rebut del client(bytes %d): %s\n",	result, buffer);
 		ref=serverStrRead (buffer, &v, &t, &m);
+		printf("\n ref=%d \n",ref);
+		printf("\n buffer=%s \n",buffer);
+		/*tractar dades*/
+		
 
 		/*Enviar*/
 		strcpy(buffer,missatge); //Copiar missatge a buffer
