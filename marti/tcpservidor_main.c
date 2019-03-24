@@ -52,12 +52,11 @@ int main(int argc, char *argv[])
 	int			sockAddrSize;
 	int			sFd;
 	int			newFd;
-	int			nRead;
 	int 		result;
 	char		buffer[256];
 	char		missatge[] = "#(2)(0,23.3)(10,23.3)";
 	//variables de funcionament
-	int ref=-2;
+	int rs=-2;
 	int v=1,t=2,m=3;
 
 	/*Preparar l'adreça local*/
@@ -87,8 +86,8 @@ int main(int argc, char *argv[])
 		/*Rebre*/
 		result = read(newFd, buffer, 256);
 		printf("Missatge rebut del client(bytes %d): %s\n",	result, buffer);
-		ref=serverStrRead (buffer, &v, &t, &m);
-		printf("\n ref=%d \n",ref);
+		rs=serverStrRead (buffer, &v, &t, &m);
+		printf("\n rs=%d \n",rs);
 		printf("\n buffer=%s \n",buffer);
 		/*tractar dades*/
 		

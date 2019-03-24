@@ -6,12 +6,18 @@
 #define REQUEST_MSG_SIZE	1024
 #define REPLY_MSG_SIZE		500
 #define SERVER_PORT_NUM		5001
-
+//funcio per saber si el functions.c funciona i el referencies be.
 void prova(){
 	printf("\n in \n");
 	printf("asdf");
 
 }
+//funcio per convertir un sol caracter a numeric.
+int ctoi( char c ){
+    return c=='0'?0:c=='1'?1:c=='2'?2:c=='3'?3:c=='4'?4:
+           c=='5'?5:c=='6'?6:c=='7'?7:c=='8'?8:c=='9'?9:-1;
+}
+//funcio que crida al client tcp. Li has de passar el array i la direcció IP.
 int clientTcp(char* missatge, char* serverName){
 	
 	struct sockaddr_in	serverAddr;
@@ -55,9 +61,8 @@ int clientTcp(char* missatge, char* serverName){
 
 	return 0;
 	}
-
-int clientMenuStr(char* buffer)
-{
+//funcio que fa de menu per escollir les trames a enviar desde el client
+int clientMenuStr(char* buffer){
 	
 	char misatge[20]="";
 	char temps[2];
@@ -258,8 +263,7 @@ int clientMenuStr(char* buffer)
 	} 
 	return flag;
 }
-
-
+//funcio que llegeix el que ha rebut del servidor i ho converteix a dades a guardar
 int clientStrRead(char *r, int *cr, float *n){
 	
 	int ref=-1;
@@ -353,60 +357,67 @@ int clientStrRead(char *r, int *cr, float *n){
 		}
 	}
 }
-
-
+//funcio que agafa la trama rebuda del client i la identifica.
 int serverStrRead (char *r, int *v, int *t, int *m){
 	
-	int ref=-2;
+	int rs=-2;
 	int i=0;
 	int flag=0;
 	char aux;
-	
-	if (r[i]!="{"){
-		ref=-1;
+	int vi, ti, mi;
+	if (r[i]!='{'){
+		rs=-1;
+		printf("\n in1\n");
 	}else{
+		printf("\n in2\n");
 		i++;//p1	
 		aux=r[i];
 		i++;//p2
 		switch(aux){
 			case 'M':;
 			case 'm':
-				ref=1;
-				*v=atoi(r[i]);
+				printf("\n in1\n");
+				rs=1;
+				aux=r[i];
+				vi=ctoi(aux);
+				printf("\n in3\n");
 				i++;//p3
-				*t=atoi(r[i])*10+atoi(r[i+1]);
+				ti=ctoi(r[i])*10+ctoi(r[i+1]);
 				i++;//p4
 				i++;//p5
-				*m=atoi(r[i]);
+				mi=ctoi(r[i]);
 				break;
 			case 'U':;
 			case 'u':
-				ref=2;
+				rs=2;
 				break;
 				
 			case 'X':;
 			case 'x':
-				ref=2;
+				rs=2;
 				break;
 				
 			case 'Y':;
 			case 'y':
-				ref=3;
+				rs=3;
 				break;
 				
 			case 'R':;
 			case 'r':
-				ref=4;
+				rs=4;
 				break;
 			
 			case 'B':;
 			case 'b':
-				ref=5;
-				break;
-				
-		return ref;		
+				rs=5;
+				break;	
 		}
 	}
+	printf("\n ref interna=%d\n",rs);
+	*v=vi;
+	*t=ti;
+	*m=mi;
+	return rs;	
 }
 
 
