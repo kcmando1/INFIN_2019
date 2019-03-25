@@ -353,18 +353,20 @@ int clientStrRead(char *r, int *cr, float *n){
 				cr=atoi(r[i]);
 				break;
 				
-		return ref;		
+			
 		}
 	}
+	return ref;	
 }
 //funcio que agafa la trama rebuda del client i la identifica.
 int serverStrRead (char *r, int *v, int *t, int *m){
-	
+	float mit=1.234,max=0.123,min=0.987,con=55;
 	int rs=-2;
 	int i=0;
 	int flag=0;
-	char aux;
+	char aux,b[10];
 	int vi, ti, mi;
+	char cr='0';
 	if (r[i]!='{'){
 		rs=-1;
 		printf("\n in1\n");
@@ -386,31 +388,128 @@ int serverStrRead (char *r, int *v, int *t, int *m){
 				i++;//p4
 				i++;//p5
 				mi=ctoi(r[i]);
+				if (!(vi==0||vi==1)){
+					cr='2';
+				}
+				if (ti>20||ti<1){
+					cr='2';
+				}
+				if (mi>9||mi<1){
+					mi='2';
+				}
+				
+				r[0]='{';
+				r[1]='M';
+				r[2]=cr;
+				r[3]='}';
+				r[4]='\0';
 				break;
 			case 'U':;
 			case 'u':
 				rs=2;
+				sprintf(b,"%.3f",mit);
+				r[0]='{';
+				r[1]='U';
+				r[2]=cr;
+				r[3]='b[0]';
+				r[4]='b[1]';
+				r[5]='b[2]';
+				r[6]='b[3]';
+				r[7]='b[4]';
+				r[8]='}';
+				r[9]='\0';
+				
+				
 				break;
 				
 			case 'X':;
 			case 'x':
 				rs=2;
+				
+				sprintf(b,"%.3f",max);
+				r[0]='{';
+				r[1]='X';
+				r[2]=cr;
+				r[3]='b[0]';
+				r[4]='b[1]';
+				r[5]='b[2]';
+				r[6]='b[3]';
+				r[7]='b[4]';
+				r[8]='}';
+				r[9]='\0';
 				break;
 				
 			case 'Y':;
 			case 'y':
 				rs=3;
+				sprintf(b,"%.3f",min);
+				r[0]='{';
+				r[1]='Y';
+				r[2]=cr;
+				r[3]='b[0]';
+				r[4]='b[1]';
+				r[5]='b[2]';
+				r[6]='b[3]';
+				r[7]='b[4]';
+				r[8]='}';
+				r[9]='\0';
 				break;
 				
 			case 'R':;
 			case 'r':
 				rs=4;
+				r[0]='{';
+				r[1]='R';
+				r[2]=cr;
+				r[3]='}';
+				r[4]='\0';
+				
 				break;
 			
 			case 'B':;
 			case 'b':
+			
 				rs=5;
-				break;	
+				sprintf(b,"%d",con);
+				r[0]='{';
+				r[1]='B';
+				r[2]=cr;
+				r[3]=r[4]=r[5]=r[6]='0';
+				if(strlen(b)==4){
+					r[3]=b[0];
+					r[4]=b[1];
+					r[5]=b[2];
+					r[6]=b[3];	
+				}
+				if(strlen(b)==3){
+					r[3]='0';
+					r[4]=b[0];
+					r[5]=b[1];
+					r[6]=b[2];	
+				}
+				if(strlen(b)==2){
+					r[3]='0';
+					r[4]='0';
+					r[5]=b[0];
+					r[6]=b[1];
+				}
+				if(strlen(b)==1){
+					r[3]='0';
+					r[4]='0';
+					r[5]='0';
+					r[6]=b[0];
+				}
+				r[7]='}';
+				r[8]='\0';
+				break;
+			default:
+				r[0]='{';
+				r[1]='0';
+				r[2]='1';
+				r[3]='}';
+				r[4]='\0';
+				break;
+				
 		}
 	}
 	printf("\n ref interna=%d\n",rs);

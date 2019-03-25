@@ -93,7 +93,7 @@ int main(int argc, char *argv[])
 		
 
 		/*Enviar*/
-		strcpy(buffer,missatge); //Copiar missatge a buffer
+		//strcpy(buffer,missatge); //Copiar missatge a buffer
 		result = write(newFd, buffer, strlen(buffer)+1); //+1 per enviar el 0 final de cadena
 		printf("Missatge enviat a client(bytes %d): %s\n",	result, missatge);
 
