@@ -360,7 +360,8 @@ int clientStrRead(char *r, int *cr, float *n){
 }
 //funcio que agafa la trama rebuda del client i la identifica.
 int serverStrRead (char *r, int *v, int *t, int *m){
-	float mit=1.234,max=0.123,min=0.987,con=55;
+	float mit=1.234,max=0.123,min=0.987;
+	int cont=55;
 	int rs=-2;
 	int i=0;
 	int flag=0;
@@ -407,15 +408,16 @@ int serverStrRead (char *r, int *v, int *t, int *m){
 			case 'U':;
 			case 'u':
 				rs=2;
+				b[0]='\0';
 				sprintf(b,"%.3f",mit);
 				r[0]='{';
 				r[1]='U';
 				r[2]=cr;
-				r[3]='b[0]';
-				r[4]='b[1]';
-				r[5]='b[2]';
-				r[6]='b[3]';
-				r[7]='b[4]';
+				r[3]=b[0];
+				r[4]=b[1];
+				r[5]=b[2];
+				r[6]=b[3];
+				r[7]=b[4];
 				r[8]='}';
 				r[9]='\0';
 				
@@ -430,11 +432,11 @@ int serverStrRead (char *r, int *v, int *t, int *m){
 				r[0]='{';
 				r[1]='X';
 				r[2]=cr;
-				r[3]='b[0]';
-				r[4]='b[1]';
-				r[5]='b[2]';
-				r[6]='b[3]';
-				r[7]='b[4]';
+				r[3]=b[0];
+				r[4]=b[1];
+				r[5]=b[2];
+				r[6]=b[3];
+				r[7]=b[4];
 				r[8]='}';
 				r[9]='\0';
 				break;
@@ -443,14 +445,15 @@ int serverStrRead (char *r, int *v, int *t, int *m){
 			case 'y':
 				rs=3;
 				sprintf(b,"%.3f",min);
+				printf("\n cont s %c %c %c %c %c \n",b[0],b[1],b[2],b[3],b[4]);
 				r[0]='{';
 				r[1]='Y';
 				r[2]=cr;
-				r[3]='b[0]';
-				r[4]='b[1]';
-				r[5]='b[2]';
-				r[6]='b[3]';
-				r[7]='b[4]';
+				r[3]=b[0];
+				r[4]=b[1];
+				r[5]=b[2];
+				r[6]=b[3];
+				r[7]=b[4];
 				r[8]='}';
 				r[9]='\0';
 				break;
@@ -470,12 +473,15 @@ int serverStrRead (char *r, int *v, int *t, int *m){
 			case 'b':
 			
 				rs=5;
-				sprintf(b,"%d",con);
+				b[0]='\0';
+				sprintf(b,"%d",cont);
+				//printf("\n cont s %c %c %c %c \n",b[0],b[1],b[2],b[3]);    
+				//printf("\n cont=%s \n",b);
 				r[0]='{';
 				r[1]='B';
 				r[2]=cr;
-				r[3]=r[4]=r[5]=r[6]='0';
-				if(strlen(b)==4){
+				//r[3]=r[4]=r[5]=r[6]='0';
+				if(strlen(b)>=4){
 					r[3]=b[0];
 					r[4]=b[1];
 					r[5]=b[2];
