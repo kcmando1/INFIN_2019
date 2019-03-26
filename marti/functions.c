@@ -273,24 +273,27 @@ int clientStrRead(char *r, int *cr, float *n){
 	int adqs=0,ms=0;
 	float un=0,xn=0,yn=0;
 	
-	if (r[i]!="{"){
+	if (!(r[i]=='{')){
 		flag=1;
+		printf("caca");
 	}else{
+		printf("culo");
 		i++;//p1	
 		aux=r[i];
 		i++;//p2
+		printf("case %c",aux);
 		switch(aux){
 			case 'M':;
 			case 'm':
 				ref=1;
-				cr=atoi(r[i]);
+				cr=ctoi(r[i]);
 				
 				break;
 				
 			case 'U':;
 			case 'u':
 				ref=2;
-				cr=atoi(r[i]);
+				cr=ctoi(r[i]);
 				i++;
 				auxc[0] = r[i];
 				i++;
@@ -301,13 +304,15 @@ int clientStrRead(char *r, int *cr, float *n){
 				auxc[3] = r[i];
 				i++;
 				auxc[4] = r[i];
+				auxc[5] = '\0';
+				printf("atoff %f",atof(auxc));
 				*n=atof(auxc);
 				break;
 				
 			case 'X':;
 			case 'x':
 				ref=3;
-				cr=atoi(r[i]);
+				cr=ctoi(r[i]);
 				i++;
 				auxc[0] = r[i];
 				i++;
@@ -318,13 +323,15 @@ int clientStrRead(char *r, int *cr, float *n){
 				auxc[3] = r[i];
 				i++;
 				auxc[4] = r[i];
+				auxc[5] = '\0';
+				printf("atoff %f",atof(auxc));
 				*n=atof(auxc);
 				break;
 				
 			case 'Y':;
 			case 'y':
 				ref=4;
-				cr=atoi(r[i]);
+				cr=ctoi(r[i]);
 				i++;
 				auxc[0] = r[i];
 				i++;
@@ -335,6 +342,8 @@ int clientStrRead(char *r, int *cr, float *n){
 				auxc[3] = r[i];
 				i++;
 				auxc[4] = r[i];
+				auxc[5] = '\0';
+				printf("atoff %f",atof(auxc));
 				*n=atof(auxc);
 				break;
 				break;
@@ -344,13 +353,28 @@ int clientStrRead(char *r, int *cr, float *n){
 			case 'R':;
 			case 'r':
 				ref=5;
-				cr=atoi(r[i]);
+				cr=ctoi(r[i]);
 				break;
 			
 			case 'B':;
 			case 'b':
 				ref=6;
-				cr=atoi(r[i]);
+				cr=ctoi(r[i]);
+				i++;
+				auxc[0] = r[i];
+				i++;
+				auxc[1] = r[i];
+				i++;
+				auxc[2] = r[i];
+				i++;
+				auxc[3] = r[i];
+				i++;
+				auxc[4] = r[i];
+				//auxc[5] = '\0';
+				printf("\n auxc = %s\n",auxc);
+				printf("atoff %f",strtof(auxc,NULL));
+				*n=atof(auxc);
+				printf("\n atof = %f\n",*n);
 				break;
 				
 			
@@ -396,7 +420,7 @@ int serverStrRead (char *r, int *v, int *t, int *m){
 					cr='2';
 				}
 				if (mi>9||mi<1){
-					mi='2';
+					cr='2';
 				}
 				
 				r[0]='{';
