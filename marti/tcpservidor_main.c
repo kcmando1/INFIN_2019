@@ -1,9 +1,9 @@
 /***************************************************************************
-                          main.c  -  server
+                          tcpservidor_main.c  
                              -------------------
-    begin                : lun feb  4 15:30:41 CET 2002
-    copyright            : (C) 2002 by A. Moreno
-    email                : amoreno@euss.es
+    begin                : mie mar  27 17:30:41
+    copyright            : (C) 2019 by 349Kings
+    email                : marti.soucheiron@hotmail.com
  ***************************************************************************/
 
 /***************************************************************************
@@ -14,7 +14,6 @@
  *   (at your option) any later version.                                   *
  *                                                                         *
  ***************************************************************************/
-
 #ifdef HAVE_CONFIG_H
 #include <config.h>
 #endif

@@ -1,3 +1,10 @@
+/***************************************************************************
+                          functions.h  -  Functions
+                             -------------------
+    copyright            : (C) 2019 by 349Kings
+                  
+ ***************************************************************************/
+
 //insertion functions.h file
 #ifdef HAVE_CONFIG_H
 #include <config.h>
@@ -15,10 +22,17 @@
 #include <unistd.h>
 #include <asm/socket.h>		//internes
 
+typedef struct{
+	float mit;
+	float max;
+	float min;
+	int counter;
+}clda;
+	
 
 
 void prova();
-int clientStrRead(char *r, int *cr, float *n);
+clda clientStrRead(char *r, int *cr, float *n,int cont);
 int serverStrRead (char *r, int *v, int *t, int *m);
 int clientMenuStr(char* buffer);
 int clientTcp(char* missatge, char* serverName);

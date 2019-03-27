@@ -1,3 +1,9 @@
+/***************************************************************************
+                          functions.c  -  Functions
+                             -------------------
+    copyright            : (C) 2019 by 349Kings
+                  
+ ***************************************************************************/
 //inclu l'arxiu de capçaleres
 #include "functions.h"
 
@@ -264,8 +270,8 @@ int clientMenuStr(char* buffer){
 	return flag;
 }
 //funcio que llegeix el que ha rebut del servidor i ho converteix a dades a guardar
-int clientStrRead(char *r, int *cr, float *n){
-	
+clda clientStrRead(char *r, int *cr, float *n,int cont){
+	clda data;
 	int ref=-1;
 	int i=0;
 	int flag=0;
@@ -299,6 +305,7 @@ int clientStrRead(char *r, int *cr, float *n){
 				auxc[5] = ' '; 
 				//printf("\n atoff %f",strtof (auxc, &pend));
 				*n=strtof (auxc, NULL);
+				data.mit= *n;
 				break;
 				
 			case 'X':;
@@ -313,6 +320,7 @@ int clientStrRead(char *r, int *cr, float *n){
 				auxc[5] = '\0';
 				//printf("atoff %f",atof(auxc));
 				*n=atof(auxc);
+				data.max=*n;
 				break;
 				
 			case 'Y':;
@@ -326,8 +334,9 @@ int clientStrRead(char *r, int *cr, float *n){
 				auxc[3] = r[6];
 				auxc[4] = r[7];
 				auxc[5] = '\0';
-				//printf("atoff %f",atof(auxc));
+				printf("atoff %f",atof(auxc));
 				*n=atof(auxc);
+				data.min= *n;
 				break;
 				break;
 				
@@ -349,11 +358,12 @@ int clientStrRead(char *r, int *cr, float *n){
 				auxc[4] = r[7];
 				//printf("atoff %f",strtof(auxc,&pend));
 				*n=atof(auxc);
+				data.counter=(int) *n;
 				//printf("\n atof = %f\n",*n);
 				break;		
 		}
 	}
-	return ref;	
+	return data;	
 }
 //funcio que agafa la trama rebuda del client i la identifica.
 int serverStrRead (char *r, int *v, int *t, int *m){
