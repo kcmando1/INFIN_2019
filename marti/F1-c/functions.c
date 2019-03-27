@@ -59,7 +59,7 @@ int clientTcp(char* missatge, char* serverName){
 	printf("Missatge enviat a servidor(bytes %d): %s\n",	result, missatge);
 
 	/*Rebre*/
-	result = read(sFd, buffer, 256);
+	result = read(sFd, missatge, 256);
 	printf("Missatge rebut del servidor(bytes %d): %s\n",	result, buffer);
 
 	/*Tancar el socket*/
@@ -279,10 +279,7 @@ clda clientStrRead(char *r, int *cr, float *n,int cont){
 	char* pend;
 	int adqs=0,ms=0;
 	float un=0,xn=0,yn=0;
-	data.mit= -1;
-	data.max= -1;
-	data.min= -1;
-	data.counter= -1;
+	
 	if (!(r[0]=='{')){
 		flag=1;
 	}else{
@@ -306,7 +303,7 @@ clda clientStrRead(char *r, int *cr, float *n,int cont){
 				auxc[3] = r[6];
 				auxc[4] = r[7];
 				auxc[5] = ' '; 
-				printf("\n atoff %f",strtof (auxc, &pend));
+				//printf("\n atoff %f",strtof (auxc, &pend));
 				*n=strtof (auxc, NULL);
 				data.mit= *n;
 				break;
@@ -321,7 +318,7 @@ clda clientStrRead(char *r, int *cr, float *n,int cont){
 				auxc[3] = r[6];
 				auxc[4] = r[7];
 				auxc[5] = '\0';
-				printf("atoff %f",atof(auxc));
+				//printf("atoff %f",atof(auxc));
 				*n=atof(auxc);
 				data.max=*n;
 				break;
@@ -359,24 +356,19 @@ clda clientStrRead(char *r, int *cr, float *n,int cont){
 				auxc[2] = r[5];
 				auxc[3] = r[6];
 				auxc[4] = r[7];
-				auxc[5] = '\0';
-				printf("atoff %f",atof(auxc));
+				//printf("atoff %f",strtof(auxc,&pend));
 				*n=atof(auxc);
 				data.counter=(int) *n;
 				//printf("\n atof = %f\n",*n);
 				break;		
 		}
 	}
-	printf("data1 %f",data.mit);
-	printf("data2 %f",data.min);
-	printf("data3 %f",data.max);
-	printf("data4 %d",data.counter);
 	return data;	
 }
 //funcio que agafa la trama rebuda del client i la identifica.
-int serverStrRead (char *r, int *v, int *t, int *m,srda dase){
-	float mit=dase.mit,max=dase.max,min=dase.min;
-	int cont=dase.counter;
+int serverStrRead (char *r, int *v, int *t, int *m){
+	float mit=1.234,max=0.123,min=0.987;
+	int cont=55;
 	int rs=-2;
 	int i=0;
 	int flag=0;

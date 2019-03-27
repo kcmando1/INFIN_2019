@@ -28,20 +28,12 @@ typedef struct{
 	float min;
 	int counter;
 }clda;
-
-typedef struct{
-	float mit;
-	float max;
-	float min;
-	int counter;
-}srda;
-
 	
 
 
 void prova();
 clda clientStrRead(char *r, int *cr, float *n,int cont);
-int serverStrRead (char *r, int *v, int *t, int *m,srda dase);
+int serverStrRead (char *r, int *v, int *t, int *m);
 int clientMenuStr(char* buffer);
 int clientTcp(char* missatge, char* serverName);
 #endif

@@ -22,18 +22,16 @@ void main()
 	int aux=-1,cr=0,rs=-2,cont=0;
 	float fret;
 	clda dare[3600];
-	while(1){
+	
 		
 		aux=clientMenuStr(b);
 		clientTcp(b,"127.0.0.1");
 		dare[cont]=clientStrRead(b,&cr,&fret,cont);
-		if(b[1]=='x'||b[1]=='y'||b[1]=='u'||b[1]=='b'||b[1]=='X'||b[1]=='Y'||b[1]=='U'||b[1]=='B'){
-			printf("\n dare\nmit %f\nmax %f\nmin %f\ncont %d\n",dare[cont].mit,dare[cont].max,dare[cont].min,dare[cont].counter);
-		}
+		printf("\n dare\nmit%f\nmax%f\nmin%f\ncont%d\n",dare[cont].mit,dare[cont].max,dare[cont].min,dare[cont].counter);
 		cont++;
 		//printf("\n flag=%d \n",aux);
 		printf("\n buffer= %s",b);
-	}
+	
 	
 	
 

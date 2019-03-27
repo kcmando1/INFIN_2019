@@ -55,17 +55,9 @@ int main(int argc, char *argv[])
 	char		buffer[256];
 	//char		missatge[];
 	//variables de funcionament
-	int rs=-2,i=0,j=0;
+	int rs=-2;
 	int v=1,t=2,m=3;
-	srda dase[3600];
-	do{
-		dase[i].mit=i;
-		dase[i].max=i;
-		dase[i].min=i;
-		dase[i].counter=i;
-		i++;
-	}while (i<3600);
-	i=0;
+
 	/*Preparar l'adreça local*/
 	sockAddrSize=sizeof(struct sockaddr_in);
 	bzero ((char *)&serverAddr, sockAddrSize); //Posar l'estructura a zero
@@ -84,9 +76,6 @@ int main(int argc, char *argv[])
 	
 	/*Bucle s'acceptació de connexions*/
 	while(1){
-		for( j=0; j<sizeof( buffer ); j++ ){
-			buffer[j]='\0';
-		}
 		printf("\nServidor esperant connexions\n");
 
 		/*Esperar conexió. sFd: socket pare, newFd: socket fill*/
@@ -96,14 +85,14 @@ int main(int argc, char *argv[])
 		/*Rebre*/
 		result = read(newFd, buffer, 256);
 		printf("Missatge rebut del client(bytes %d): %s\n",	result, buffer);
-		rs=serverStrRead (buffer, &v, &t, &m,dase[i%3600]);
+		rs=serverStrRead (buffer, &v, &t, &m);
 		printf("\n buffer=%s \n",buffer);
-		i++;
+		
 
 		/*Enviar*/
 		//strcpy(buffer,missatge); //Copiar missatge a buffer
 		result = write(newFd, buffer, strlen(buffer)+1); //+1 per enviar el 0 final de cadena
-		printf("Missatge enviat a client(bytes %d): %s\n",	result, buffer);
+		//printf("Missatge enviat a client(bytes %d): %s\n",	result, missatge);
 
 		/*Tancar el socket fill*/
 		result = close(newFd);

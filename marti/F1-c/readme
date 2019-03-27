@@ -1,0 +1,5 @@
+instruccions de compilació
+
+-gcc client_main.c functions.c -o client_main //per compilar el client
+
+-gcc tcpservidor_main.c functions.c -o tcpservidor_main.c
