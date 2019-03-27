@@ -53,7 +53,7 @@ int clientTcp(char* missatge, char* serverName){
 	printf("Missatge enviat a servidor(bytes %d): %s\n",	result, missatge);
 
 	/*Rebre*/
-	result = read(sFd, buffer, 256);
+	result = read(sFd, missatge, 256);
 	printf("Missatge rebut del servidor(bytes %d): %s\n",	result, buffer);
 
 	/*Tancar el socket*/
@@ -269,81 +269,64 @@ int clientStrRead(char *r, int *cr, float *n){
 	int ref=-1;
 	int i=0;
 	int flag=0;
-	char aux,auxc[5],m[5],o[5];
+	char aux,auxc[10],m[5],o[5];
+	char* pend;
 	int adqs=0,ms=0;
 	float un=0,xn=0,yn=0;
 	
-	if (!(r[i]=='{')){
+	if (!(r[0]=='{')){
 		flag=1;
-		printf("caca");
 	}else{
-		printf("culo");
-		i++;//p1	
-		aux=r[i];
-		i++;//p2
+		aux=r[1];
 		printf("case %c",aux);
 		switch(aux){
 			case 'M':;
 			case 'm':
 				ref=1;
-				cr=ctoi(r[i]);
+				cr=ctoi(r[2]);
 				
 				break;
 				
 			case 'U':;
 			case 'u':
 				ref=2;
-				cr=ctoi(r[i]);
-				i++;
-				auxc[0] = r[i];
-				i++;
-				auxc[1] = r[i];
-				i++;
-				auxc[2] = r[i];
-				i++;
-				auxc[3] = r[i];
-				i++;
-				auxc[4] = r[i];
-				auxc[5] = '\0';
-				printf("atoff %f",atof(auxc));
-				*n=atof(auxc);
+				cr=ctoi(r[2]);
+				auxc[0] = r[3];
+				auxc[1] = r[4];
+				auxc[2] = r[5];
+				auxc[3] = r[6];
+				auxc[4] = r[7];
+				auxc[5] = ' '; 
+				//printf("\n atoff %f",strtof (auxc, &pend));
+				*n=strtof (auxc, NULL);
 				break;
 				
 			case 'X':;
 			case 'x':
 				ref=3;
-				cr=ctoi(r[i]);
-				i++;
-				auxc[0] = r[i];
-				i++;
-				auxc[1] = r[i];
-				i++;
-				auxc[2] = r[i];
-				i++;
-				auxc[3] = r[i];
-				i++;
-				auxc[4] = r[i];
+				cr=ctoi(r[2]);
+				auxc[0] = r[3];
+				auxc[1] = r[4];
+				auxc[2] = r[5];
+				auxc[3] = r[6];
+				auxc[4] = r[7];
 				auxc[5] = '\0';
-				printf("atoff %f",atof(auxc));
+				//printf("atoff %f",atof(auxc));
 				*n=atof(auxc);
 				break;
 				
 			case 'Y':;
 			case 'y':
 				ref=4;
-				cr=ctoi(r[i]);
+				cr=ctoi(r[2]);
 				i++;
-				auxc[0] = r[i];
-				i++;
-				auxc[1] = r[i];
-				i++;
-				auxc[2] = r[i];
-				i++;
-				auxc[3] = r[i];
-				i++;
-				auxc[4] = r[i];
+				auxc[0] = r[3];
+				auxc[1] = r[4];
+				auxc[2] = r[5];
+				auxc[3] = r[6];
+				auxc[4] = r[7];
 				auxc[5] = '\0';
-				printf("atoff %f",atof(auxc));
+				//printf("atoff %f",atof(auxc));
 				*n=atof(auxc);
 				break;
 				break;
@@ -352,32 +335,22 @@ int clientStrRead(char *r, int *cr, float *n){
 				
 			case 'R':;
 			case 'r':
-				ref=5;
-				cr=ctoi(r[i]);
+				cr=ctoi(r[2]);
 				break;
 			
 			case 'B':;
 			case 'b':
 				ref=6;
-				cr=ctoi(r[i]);
-				i++;
-				auxc[0] = r[i];
-				i++;
-				auxc[1] = r[i];
-				i++;
-				auxc[2] = r[i];
-				i++;
-				auxc[3] = r[i];
-				i++;
-				auxc[4] = r[i];
-				//auxc[5] = '\0';
-				printf("\n auxc = %s\n",auxc);
-				printf("atoff %f",strtof(auxc,NULL));
+				cr=ctoi(r[2]);
+				auxc[0] = r[3];
+				auxc[1] = r[4];
+				auxc[2] = r[5];
+				auxc[3] = r[6];
+				auxc[4] = r[7];
+				//printf("atoff %f",strtof(auxc,&pend));
 				*n=atof(auxc);
-				printf("\n atof = %f\n",*n);
-				break;
-				
-			
+				//printf("\n atof = %f\n",*n);
+				break;		
 		}
 	}
 	return ref;	
@@ -394,20 +367,16 @@ int serverStrRead (char *r, int *v, int *t, int *m){
 	char cr='0';
 	if (r[i]!='{'){
 		rs=-1;
-		printf("\n in1\n");
 	}else{
-		printf("\n in2\n");
 		i++;//p1	
 		aux=r[i];
 		i++;//p2
 		switch(aux){
 			case 'M':;
 			case 'm':
-				printf("\n in1\n");
 				rs=1;
 				aux=r[i];
 				vi=ctoi(aux);
-				printf("\n in3\n");
 				i++;//p3
 				ti=ctoi(r[i])*10+ctoi(r[i+1]);
 				i++;//p4
@@ -542,7 +511,6 @@ int serverStrRead (char *r, int *v, int *t, int *m){
 				
 		}
 	}
-	printf("\n ref interna=%d\n",rs);
 	*v=vi;
 	*t=ti;
 	*m=mi;

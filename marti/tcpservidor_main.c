@@ -54,7 +54,7 @@ int main(int argc, char *argv[])
 	int			newFd;
 	int 		result;
 	char		buffer[256];
-	char		missatge[] = "#(2)(0,23.3)(10,23.3)";
+	//char		missatge[];
 	//variables de funcionament
 	int rs=-2;
 	int v=1,t=2,m=3;
@@ -87,15 +87,13 @@ int main(int argc, char *argv[])
 		result = read(newFd, buffer, 256);
 		printf("Missatge rebut del client(bytes %d): %s\n",	result, buffer);
 		rs=serverStrRead (buffer, &v, &t, &m);
-		printf("\n rs=%d \n",rs);
 		printf("\n buffer=%s \n",buffer);
-		/*tractar dades*/
 		
 
 		/*Enviar*/
 		//strcpy(buffer,missatge); //Copiar missatge a buffer
 		result = write(newFd, buffer, strlen(buffer)+1); //+1 per enviar el 0 final de cadena
-		printf("Missatge enviat a client(bytes %d): %s\n",	result, missatge);
+		//printf("Missatge enviat a client(bytes %d): %s\n",	result, missatge);
 
 		/*Tancar el socket fill*/
 		result = close(newFd);

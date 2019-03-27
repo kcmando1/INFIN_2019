@@ -8,11 +8,6 @@ void main()
 	aux=clientMenuStr(b);
 	clientTcp(b,"127.0.0.1");
 	rs=clientStrRead(b,&cr,&fret);
-	switch(rs){
-		case 1:
-			
-		}
-	
 	
 	
 	
